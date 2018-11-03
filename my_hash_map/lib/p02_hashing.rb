@@ -40,15 +40,21 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    new_str = ""
+#     new_str = ""
     # self.each do |k, v|
     #   new_str += v.ord.to_s
     # end
     # new_str.to_i
-    hash_arr = self.sort_by { |k, v| k }
-    hash_arr.each do |subarr|
-      new_str << subarr[1].ord.to_s
-    end
-    new_str.to_i
+#     hash_arr = self.sort_by { |k, v| k }
+#     hash_arr.each do |subarr|
+#       new_str << subarr[1].ord.to_s
+#     end
+#     new_str.to_i
+    
+    self.sort_by { |k, v| k }
+        .reduce("") do |str, subArr|
+          str + subArr[0].to_s.ord.to_s + subArr[1].ord.to_s
+        end
+        .to_i
   end
 end
